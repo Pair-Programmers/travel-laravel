@@ -7,4 +7,9 @@
 <script src="{{ asset('assets/website') }}/js/touchspin.js"></script>
 <script src="{{ asset('assets/website') }}/js/owl.js"></script>
 <script src="{{ asset('assets/website') }}/js/wow.js"></script>
+<script src="{{ asset('assets/website') }}/js/jquery.fancybox.js"></script>
+<script src="{{ asset('assets/website') }}/js/mixitup.js"></script>
+<script src="{{ asset('assets/website') }}/js/appear.js"></script>
+<script src="{{ asset('assets/website') }}/js/odometer.js"></script>
 <script src="{{ asset('assets/website') }}/js/custom-script.js"></script>
+

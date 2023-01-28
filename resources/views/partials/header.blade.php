@@ -5,20 +5,26 @@
                 <div class="inner clearfix">
                     <div class="top-left clearfix">
                         <ul class="info clearfix">
-                            <li><i class="icon fa fa-envelope"></i> <a href="mailto:INFO@TREKER.COM">INFO@TREKER.COM</a></li>
-                            <li><i class="icon fa fa-phone-circle"></i> <a href="tel:+11256326501">+11 256 3265 01</a></li>
+                            <li><i class="icon fa fa-envelope"></i> <a href="mailto:INFO@TREKER.COM">INFO@TREKER.COM</a>
+                            </li>
+                            <li><i class="icon fa fa-phone-circle"></i> <a href="tel:+11256326501">+11 256 3265 01</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="top-right clearfix">
-                        <div class="lang-box">
-                            <div class="lang-btn clearfix"><span class="img far fa-globe-americas"></span><span class="txt">Eng</span><span class="icon far fa-angle-down"></span></div>
-                            <ul class="lang-list">
-                                <li><a href="#">Tur</a></li>
-                                <li><a href="#">Esp</a></li>
-                                <li><a href="#">Rus</a></li>
-                            </ul>
-                        </div>
-                        <div class="login"><i class="icon fa fa-user"></i> <a href="#">SIGN IN</a></div>
+                        @guest
+                            <div class="login">
+                                <i class="icon fa fa-user"></i> <a href="{{ route('login') }}">SIGN IN</a>
+                            </div>
+                        @else
+                            <div class="login"><i class="icon fa fa-user"></i>
+                                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    href="{{ route('logout') }}">Logout</a>
+                            </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @endguest
                     </div>
                 </div>
             </div>
@@ -30,7 +36,9 @@
                 <div class="main-box clearfix">
                     <!--Logo-->
                     <div class="logo-box">
-                         <div class="logo"><a href="index.html" title="Treker"><img src="images/logo.svg" alt="" title="Treker"></a></div>
+                        <div class="logo"><a href="{{ route('index') }}" title="Treker"><img
+                                    src="{{ asset('assets/website') }}/images/logo.svg" alt=""
+                                    title="Treker"></a></div>
                     </div>
 
                     <div class="nav-box clearfix">
@@ -38,69 +46,26 @@
                         <div class="nav-outer clearfix">
                             <nav class="main-menu">
                                 <ul class="navigation clearfix">
-                                    <li class="current dropdown"><a href="index.html">Home</a>
-                                        <ul>
-                                            <li><a href="index.html">Home 01</a></li>
-                                            <li><a href="index-2.html">Home 02</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="about.html">About Us</a>
-                                        <ul>
-                                            <li><a href="team.html">Our Team</a></li>
-                                            <li><a href="team-member.html">Team Member</a></li>
-                                            <li><a href="faq.html">FAQs</a></li>
-                                            <li><a href="gallery.html">Gallery</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="shop.html">Shop</a>
-                                        <ul>
-                                            <li><a href="shop.html">Our Shop</a></li>
-                                            <li><a href="product-single.html">Product Details</a></li>
-                                            <li><a href="wishlist.html">My Wishlist</a></li>
-                                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="signup.html">Signup</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="reset-password.html">Forgot Password</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="destinations.html">Destinations</a></li>
-                                    <li><a href="trekking.html">Trekking</a></li>
-                                    <li class="dropdown"><a href="#">Pages</a>
-                                        <ul>
-                                            <li><a href="activities.html">Activities</a></li>
-                                            <li><a href="destinations-2.html">Destinations 02</a></li>
-                                            <li><a href="tours.html">Tours</a></li>
-                                            <li><a href="packages.html">Packages 01</a></li>
-                                            <li><a href="packages-2.html">Packages 02</a></li>
-                                            <li><a href="booking.html">Booking</a></li>
-                                            <li><a href="terms-conditions.html">Terms & Conditions</a></li>
-                                            <li><a href="error-page.html">404 Page</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="blog.html">News</a>
-                                        <ul>
-                                            <li><a href="blog.html">Our Blog</a></li>
-                                            <li><a href="blog-2.html">Blog Classic</a></li>
-                                            <li><a href="blog-single.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact</a></li>
+
+                                    <li class="current"><a href="{{ route('index') }}">Home</a></li>
+                                    <li><a href="{{ route('about-us') }}">About Us</a></li>
+                                    <li><a href="{{ route('tour.index') }}">Tours</a></li>
+                                    <li><a href="{{ route('booking.create') }}">Booking</a></li>
+                                    <li><a href="{{ route('contact-us') }}">Contact</a></li>
                                 </ul>
                             </nav>
                             <!-- Main Menu End-->
                         </div>
                         <!--Nav Outer End-->
-
                         <div class="links-box clearfix">
                             <div class="link search-btn search-toggle"><span class="icon far fa-search"></span></div>
-                            <div class="link fav-btn"><a href="#"><span class="icon far fa-heart"></span><span class="count">02</span></a></div>
-                            <div class="link cart-btn"><a href="#" class="clearfix"><div class="cart-info"><span class="icon far fa-shopping-cart"></span>00 Items</div><div class="amount">$ 00:00</div></a></div>
+                            <div class="link fav-btn"><a href="{{ route('home') }}"><span
+                                        class="icon far fa-heart"></span><span class="count">02</span></a></div>
                         </div>
-
                         <!-- Hidden Nav Toggler -->
                         <div class="nav-toggler">
-                            <button class="hidden-bar-opener"><span class="icon"><img src="images/icons/menu-icon.svg" alt=""></span></button>
+                            <button class="hidden-bar-opener"><span class="icon"><img src="images/icons/menu-icon.svg"
+                                        alt=""></span></button>
                         </div>
 
                     </div>
@@ -112,9 +77,10 @@
                                 <div class="form-box">
                                     <div class="s-close-btn"><span class="icon far fa-times"></span></div>
                                     <span class="s-icon fa fa-search"></span>
-                                    <form method="post" action="index.html">
+                                    <form method="post" action="{{ route('index') }}">
                                         <div class="form-group">
-                                            <input type="search" name="search" value="" placeholder="Search Here" required="">
+                                            <input type="search" name="search" value=""
+                                                placeholder="Search Here" required="">
                                         </div>
                                     </form>
                                 </div>
@@ -138,68 +104,31 @@
     <section class="hidden-bar">
         <!-- Hidden Bar Wrapper -->
         <div class="hidden-bar-wrapper">
-            <div class="hidden-bar-closer"><span class="icon"><svg class="icon-close" role="presentation" viewBox="0 0 16 14"><path d="M15 0L1 14m14 0L1 0" stroke="currentColor" fill="none" fill-rule="evenodd"></path></svg></span></div>
+            <div class="hidden-bar-closer"><span class="icon"><svg class="icon-close" role="presentation"
+                        viewBox="0 0 16 14">
+                        <path d="M15 0L1 14m14 0L1 0" stroke="currentColor" fill="none" fill-rule="evenodd"></path>
+                    </svg></span></div>
             <div class="nav-logo-box">
-                <div class="logo"><a href="index.html" title="Treker"><img src="images/logo.svg" alt="" title="Treker"></a></div>
+                <div class="logo"><a href="{{ route('index') }}" title="Treker"><img src="images/logo.svg"
+                            alt="" title="Treker"></a></div>
             </div>
             <!-- .Side-menu -->
             <div class="side-menu">
-                 <ul class="navigation clearfix">
-                    <li class="current dropdown"><a href="index.html">Home</a>
-                        <ul>
-                            <li><a href="index.html">Home 01</a></li>
-                            <li><a href="index-2.html">Home 02</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="about.html">About Us</a>
-                        <ul>
-                            <li><a href="team.html">Our Team</a></li>
-                            <li><a href="team-member.html">Team Member</a></li>
-                            <li><a href="faq.html">FAQs</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="shop.html">Shop</a>
-                        <ul>
-                            <li><a href="shop.html">Our Shop</a></li>
-                            <li><a href="product-single.html">Product Details</a></li>
-                            <li><a href="wishlist.html">My Wishlist</a></li>
-                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="signup.html">Signup</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="reset-password.html">Forgot Password</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="destinations.html">Destinations</a></li>
-                    <li><a href="trekking.html">Trekking</a></li>
-                    <li class="dropdown"><a href="#">Pages</a>
-                        <ul>
-                            <li><a href="activities.html">Activities</a></li>
-                            <li><a href="destinations-2.html">Destinations 02</a></li>
-                            <li><a href="tours.html">Tours</a></li>
-                            <li><a href="packages.html">Packages 01</a></li>
-                            <li><a href="packages-2.html">Packages 02</a></li>
-                            <li><a href="booking.html">Booking</a></li>
-                            <li><a href="terms-conditions.html">Terms & Conditions</a></li>
-                            <li><a href="error-page.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="blog.html">News</a>
-                        <ul>
-                            <li><a href="blog.html">Our Blog</a></li>
-                            <li><a href="blog-2.html">Blog Classic</a></li>
-                            <li><a href="blog-single.html">Blog Details</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
+                <ul class="navigation clearfix">
+                    <li class="current"><a href="{{ route('index') }}">Home</a></li>
+                    <li><a href="{{ route('about-us') }}">About Us</a></li>
+                    <li><a href="{{ route('tour.index') }}">Tours</a></li>
+                    <li><a href="{{ route('booking.create') }}">Booking</a></li>
+                    <li><a href="{{ route('contact-us') }}">Contact</a></li>
                 </ul>
             </div><!-- /.Side-menu -->
 
             <div class="links-box clearfix">
                 <div class="clearfix">
-                    <div class="link"><a href="login.html" class="theme-btn btn-style-one"><span>Login<i class="icon far fa-angle-right"></i></span></a></div>
-                    <div class="link"><a href="signup.html" class="theme-btn btn-style-two"><span>Sign Up<i class="icon far fa-angle-right"></i></span></a></div>
+                    <div class="link"><a href="{{ route('login') }}" class="theme-btn btn-style-one"><span>Login<i
+                                    class="icon far fa-angle-right"></i></span></a></div>
+                    <div class="link"><a href="{{ route('register') }}" class="theme-btn btn-style-two"><span>Sign
+                                Up<i class="icon far fa-angle-right"></i></span></a></div>
                 </div>
             </div>
 
@@ -207,7 +136,7 @@
     </section>
     <!-- / Hidden Bar -->
 
-	<div class="cart-backdrop"></div>
+    <div class="cart-backdrop"></div>
 
     <!--Cart Sidebar-->
     <div class="cart-sidebar">
@@ -219,7 +148,8 @@
             <div class="prod-box">
                 <div class="prod-block">
                     <div class="prod-inner">
-                        <div class="prod-thumb"><a href="#"><img src="images/resource/shop/shop-thumb-1.jpg" alt=""></a></div>
+                        <div class="prod-thumb"><a href="#"><img src="images/resource/shop/shop-thumb-1.jpg"
+                                    alt=""></a></div>
                         <div class="remove-item"><a href="#"><i class="far fa-times"></i></a></div>
                         <div class="prod-title"><a href="#">Smart Air Bag Travel</a></div>
                         <div class="quantity-box">
@@ -238,7 +168,8 @@
                 <span class="dtl">$225.00</span>
             </div>
             <div class="links clearfix">
-                <div class="left"><a href="#" class="theme-btn btn-style-one"><span>View Cart</span></a></div>
+                <div class="left"><a href="#" class="theme-btn btn-style-one"><span>View Cart</span></a>
+                </div>
                 <div class="right"><a href="#" class="theme-btn btn-style-two"><span>Checkout</span></a></div>
             </div>
         </div>
