@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('tour_id');
             $table->foreign('tour_id')->references('id')->on('tours');
             $table->string('date_from');
+            $table->string('status')->default('Pending');
             $table->decimal('total_amount');
             $table->timestamps();
         });

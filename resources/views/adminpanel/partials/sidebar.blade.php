@@ -48,10 +48,18 @@
 
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.user.index')}}" class="nav-link">
+                    <a href="{{route('admin.tour.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Users
+                            Tours
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.booking.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Booking
                         </p>
                     </a>
                 </li>

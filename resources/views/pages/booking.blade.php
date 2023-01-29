@@ -1,25 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-    <!-- Banner Section -->
-    <section class="inner-banner">
-        <div class="image-layer" style="background-image: url(images/background/banner-image-1.jpg);"></div>
-        <div class="auto-container">
-            <div class="content-box">
-                <h2>Booking</h2>
-                <div class="bread-crumb">
-                    <ul class="clearfix">
-                        <li><span class="icon-home fa fa-home"></span><a href="index.html">Home</a></li>
-                        <li class="current">Booking</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--End Banner Section -->
+
 
     <!--Booking Section-->
-    <section class="booking-section">
+    <section class="booking-section" style="margin-top: 50px">
         <div class="floated-icon left"><img src="{{ asset('assets/website') }}/images/resource/stones-left.svg" alt="" title=""></div>
         <div class="floated-icon right"><img src="{{ asset('assets/website') }}/images/resource/stones-right-3.svg" alt="" title=""></div>
         <div class="auto-container">
@@ -27,54 +12,56 @@
                 <h2><span>Book This Tour</span></h2>
                 <div class="text">Contact us and get strapped in for a better adventure experience in your life-time. Just look for opportunity to be with nature. </div>
             </div>
+            @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
             <div class="form-box site-form">
                 <div class="booking-form">
-                    <form method="post" action="contact.html">
+                    <form method="post" action="{{route('booking.store')}}" enctype="multipart/form-data">
+                        @csrf
                         <div class="row clearfix">
                             <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                 <div class="f-label">Your Name <i>*</i></div>
                                 <div class="field-inner">
-                                    <input type="text" name="fieldname" value="" placeholder="" required>
+                                    <input type="text" name="name" value="" placeholder="" required>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                 <div class="f-label">Your Email <i>*</i></div>
                                 <div class="field-inner">
-                                    <input type="email" name="fieldname" value="" placeholder="" required>
+                                    <input type="email" name="email" value="" placeholder="" required>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                 <div class="f-label">Your Phone <i>*</i></div>
                                 <div class="field-inner">
-                                    <input type="text" name="fieldname" value="" placeholder="" required>
+                                    <input type="text" name="phone" value="" placeholder="" required>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                 <div class="f-label">Country <i>*</i></div>
                                 <div class="field-inner">
-                                    <select>
-                                        <option>USA</option>
-                                        <option>China</option>
-                                        <option>Russia</option>
-                                        <option>UK</option>
-                                        <option>France</option>
-                                        <option>Germany</option>
+                                    <select name="country">
+                                        <option value="USA">USA</option>
+                                        <option value="China">China</option>
+                                        <option value="Russia">Russia</option>
+                                        <option value="UK">UK</option>
+                                        <option value="France">France</option>
+                                        <option value="Germany">Germany</option>
                                     </select>
                                     <span class="alt-icon far fa-angle-down"></span>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                <div class="f-label">Choose Time <i>*</i></div>
+                                <div class="f-label">Tour / Package <i>*</i></div>
                                 <div class="field-inner">
-                                    <select>
-                                        <option>10:00 am</option>
-                                        <option>11:00 am</option>
-                                        <option>12:00 am</option>
-                                        <option>01:00 pm</option>
-                                        <option>02:00 pm</option>
-                                        <option>03:00 pm</option>
-                                        <option>04:00 pm</option>
-                                        <option>05:00 pm</option>
+                                    <select name="tour_id">
+                                        @foreach ($tours as $tour)
+                                        <option value="{{$tour->id}}">{{$tour->name}}</option>
+
+                                        @endforeach
                                     </select>
                                     <span class="alt-icon far fa-angle-down"></span>
                                 </div>
@@ -82,32 +69,32 @@
                             <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                 <div class="f-label">Date From <i>*</i></div>
                                 <div class="field-inner">
-                                    <input type="text" class="datepicker" name="fieldname" value="" placeholder="" required>
+                                    <input type="text" class="datepicker" name="date_from" value="" placeholder="" required>
                                     <span class="alt-icon fal fa-calendar fa-fw"></span>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                 <div class="f-label">Number of Guest <i>*</i></div>
                                 <div class="field-inner">
-                                    <input type="text" name="fieldname" value="" placeholder="" required>
+                                    <input type="number" name="no_of_guest" value="" placeholder="" required>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                 <div class="f-label">Number of Children <i>*</i></div>
                                 <div class="field-inner">
-                                    <input type="text" name="fieldname" value="" placeholder="" required>
+                                    <input type="number" name="no_of_child" value="" placeholder="" required>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                <h6>Add Extra</h6>
+                                <h6>Our Rates</h6>
                                 <div class="radio-group">
                                     <div class="radio-block">
-                                        <input type="radio" name="radio-1" id="radio-1">
-                                        <label for="radio-1">Service per booking</label>
+                                        {{-- <input type="radio" name="radio-1" id="radio-1"> --}}
+                                        <label for="radio-1">$50 per children</label>
                                     </div>
                                     <div class="radio-block">
-                                        <input type="radio" name="radio-1" id="radio-2">
-                                        <label for="radio-2">Service per booking</label>
+                                        {{-- <input type="radio" name="radio-1" id="radio-2"> --}}
+                                        <label for="radio-2">$100 per adult</label>
                                     </div>
                                 </div>
                                 <div class="rates clearfix">

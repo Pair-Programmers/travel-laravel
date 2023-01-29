@@ -18,5 +18,12 @@ class Booking extends Model
         'no_of_child',
         'total_amount',
         'date_from',
+        'country',
+        'status',
     ];
+
+    public function tour()
+    {
+        return $this->hasOne(Tour::class, 'id', 'tour_id');
+    }
 }

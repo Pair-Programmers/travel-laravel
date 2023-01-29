@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Tour;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -24,7 +25,8 @@ class BookingController extends Controller
      */
     public function create()
     {
-        return view('pages.booking');
+        $tours = Tour::all();
+        return view('pages.booking', compact('tours'));
     }
 
     /**
@@ -35,7 +37,31 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        $this->validate($request, [
+            'name' => 'string|required',
+            'email' => 'string|required',
+            'phone' => 'string|required',
+            'no_of_guest' => 'numeric|required',
+            'no_of_child' => 'numeric|required',
+            'date_from' => 'string|required',
+            'tour_id' => 'numeric|required',
+            'country' => 'string|required'
+        ]);
+
+        Booking::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'no_of_guest' => $request->no_of_guest,
+            'no_of_child' => $request->no_of_child,
+            'date_from' => $request->date_from,
+            'tour_id' => $request->tour_id,
+            'country' => $request->country,
+            'total_amount' => (($request->no_of_child * 50) + ($request->no_of_guest * 100)),
+        ]);
+
+        return redirect()->back()->with(['message'=>'Booking Submited Successfully, We will contact you soon.']);
     }
 
     /**

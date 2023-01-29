@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('duration');
             $table->string('image')->nullable();
             $table->string('summary');
+            $table->string('status')->default('Active');
             $table->string('description');
             $table->timestamps();
         });

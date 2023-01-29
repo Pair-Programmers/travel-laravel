@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,9 +44,14 @@ class WishlistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        Wishlist::create([
+            'user_id'=>Auth::id(),
+            'tour_id'=>$id,
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -78,8 +94,14 @@ class WishlistController extends Controller
      * @param  \App\Models\Wishlist  $wishlist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wishlist $wishlist)
+    public function destroy($id)
     {
-        //
+        $wishlist = Wishlist::where('user_id', Auth::id())->where('tour_id', $id)->get()->first();
+
+        if($wishlist){
+            $wishlist->delete();
+        }
+        
+        return redirect()->back();
     }
 }
