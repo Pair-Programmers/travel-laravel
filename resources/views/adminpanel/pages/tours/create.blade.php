@@ -83,6 +83,17 @@
 
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputPassword">Last Booking Date</label>
+                                        <input required type="date" name="last_booking_date" class="form-control"
+                                            id="inputPassword" placeholder="Enter Date">
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Add Tour</button>

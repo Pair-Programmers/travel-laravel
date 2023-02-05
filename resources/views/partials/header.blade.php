@@ -17,13 +17,16 @@
                                 <i class="icon fa fa-user"></i> <a href="{{ route('login') }}">SIGN IN</a>
                             </div>
                         @else
-                            <div class="login"><i class="icon fa fa-user"></i>
+                            <div class="login">
                                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                     href="{{ route('logout') }}">Logout</a>
                             </div>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
+                            <div class="login">
+                                <i class="icon fa fa-user"></i> <a href="{{ route('home') }}">My Account</a>
+                            </div>
                         @endguest
                     </div>
                 </div>
@@ -60,7 +63,8 @@
                         <div class="links-box clearfix">
                             <div class="link search-btn search-toggle"><span class="icon far fa-search"></span></div>
                             <div class="link fav-btn"><a href="{{ route('home') }}"><span
-                                        class="icon far fa-heart"></span><span class="count">02</span></a></div>
+                                        class="icon far fa-heart"></span></a></div>
+
                         </div>
                         <!-- Hidden Nav Toggler -->
                         <div class="nav-toggler">

@@ -17,5 +17,6 @@ class Tour extends Model
         'price',
         'duration',
         'status',
+        'last_booking_date',
     ];
 }

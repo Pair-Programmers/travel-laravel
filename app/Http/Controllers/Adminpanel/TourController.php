@@ -51,6 +51,7 @@ class TourController extends Controller
             'description' => $request->description,
             'duration' => $request->duration,
             'price' => $request->price,
+            'last_booking_date' => $request->last_booking_date,
         ]);
 
         return redirect()->route('admin.tour.index');
@@ -103,6 +104,7 @@ class TourController extends Controller
         $tour->description = $request->description;
         $tour->duration = $request->duration;
         $tour->price = $request->price;
+        $tour->price = $request->last_booking_date;
 
         $tour->save();
 

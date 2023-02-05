@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('summary');
             $table->string('status')->default('Active');
             $table->string('description');
+            $table->date('last_booking_date')->nullable();
             $table->timestamps();
         });
     }

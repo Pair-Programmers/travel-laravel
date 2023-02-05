@@ -3,13 +3,13 @@
 @section('content')
     <!-- Banner Section -->
     <section class="inner-banner">
-        <div class="image-layer" style="background-image: url(images/background/banner-image-1.jpg);"></div>
+        <div class="image-layer" style="background-image: url({{asset('assets/website') }}/images/background/banner-image-1.jpg);"></div>
         <div class="auto-container">
             <div class="content-box">
                 <h2>Wishlist</h2>
                 <div class="bread-crumb">
                     <ul class="clearfix">
-                        <li><span class="icon-home fa fa-home"></span><a href="index.html">Home</a></li>
+                        <li><span class="icon-home fa fa-home"></span><a href="{{route('home')}}">Home</a></li>
                         <li class="current">Wishlist</li>
                     </ul>
                 </div>
@@ -27,42 +27,25 @@
                     <div class="table-box">
                         <table class="wishlist-table">
                             <tbody>
+                                @foreach ($myWishlistItems as $item)
                                 <tr>
                                     <td class="prod-column image-column">
                                         <div class="image-box">
-                                            <figure class="prod-thumb"><a href="#"><img src="images/resource/shop/s-cart-thumb.jpg" alt=""></a></figure>
+                                            <figure class="prod-thumb"><a href="#"><img src="{{asset('assets/website') }}/images/resource/shop/s-cart-thumb.jpg" alt=""></a></figure>
                                         </div>
                                     </td>
                                     <td class="prod-column info-column">
                                         <div class="info-box">
-                                            <h4 class="prod-title">Smart Air Bag Travel</h4>
-                                            <div class="price">Price : <span>$225.00</span></div>
-                                            <div class="date">April 02, 2022</div>
+                                            <h4 class="prod-title">{{$item->tour->name}}</h4>
+                                            <div class="price">Price : <span>${{$item->tour->price}}</span></div>
+                                            <div class="date">Last Date:  {{$item->tour->last_booking_date}}</div>
                                         </div>
                                     </td>
                                     <td class="avail">
-                                        <div class="yes">In Stock</div>
-                                        <div class="add-btn"><a href="#" class="theme-btn add-cart-btn"><span><i class="far fa-shopping-cart"></i> Add To Cart</span></a></div>
+                                        <div class="add-btn"><a href="{{ route('wishlist.destroy', $item->id) }}" class="theme-btn add-cart-btn"><span><i class="far fa-shopping-cart"></i>Remove</span></a></div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="prod-column image-column">
-                                        <div class="image-box">
-                                            <figure class="prod-thumb"><a href="#"><img src="images/resource/shop/s-cart-thumb.jpg" alt=""></a></figure>
-                                        </div>
-                                    </td>
-                                    <td class="prod-column info-column">
-                                        <div class="info-box">
-                                            <h4 class="prod-title">Smart Air Bag Travel</h4>
-                                            <div class="price">Price : <span>$225.00</span></div>
-                                            <div class="date">April 02, 2022</div>
-                                        </div>
-                                    </td>
-                                    <td class="avail">
-                                        <div class="yes">In Stock</div>
-                                        <div class="add-btn"><a href="#" class="theme-btn add-cart-btn"><span><i class="far fa-shopping-cart"></i> Add To Cart</span></a></div>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

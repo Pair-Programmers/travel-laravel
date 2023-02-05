@@ -2,22 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tour;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class WishlistController extends Controller
+class WelcomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +16,8 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        //
+        $tours = Tour::get()->take(6);
+        return view('welcome', compact('tours'));
     }
 
     /**
@@ -44,23 +36,18 @@ class WishlistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request)
     {
-        Wishlist::create([
-            'user_id'=>Auth::id(),
-            'tour_id'=>$id,
-        ]);
-
-        return redirect()->back();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Wishlist  $wishlist
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Wishlist $wishlist)
+    public function show($id)
     {
         //
     }
@@ -68,10 +55,10 @@ class WishlistController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Wishlist  $wishlist
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Wishlist $wishlist)
+    public function edit($id)
     {
         //
     }
@@ -80,10 +67,10 @@ class WishlistController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Wishlist  $wishlist
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Wishlist $wishlist)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -91,17 +78,11 @@ class WishlistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Wishlist  $wishlist
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $wishlist = Wishlist::where('user_id', Auth::id())->where('id', $id)->get()->first();
-
-        if($wishlist){
-            $wishlist->delete();
-        }
-
-        return redirect()->back();
+        //
     }
 }

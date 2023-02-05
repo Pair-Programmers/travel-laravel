@@ -87,16 +87,6 @@
                             </div>
                             <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                 <h6>Our Rates</h6>
-                                <div class="radio-group">
-                                    <div class="radio-block">
-                                        {{-- <input type="radio" name="radio-1" id="radio-1"> --}}
-                                        <label for="radio-1">$50 per children</label>
-                                    </div>
-                                    <div class="radio-block">
-                                        {{-- <input type="radio" name="radio-1" id="radio-2"> --}}
-                                        <label for="radio-2">$100 per adult</label>
-                                    </div>
-                                </div>
                                 <div class="rates clearfix">
                                     <div class="rate-block">Adult: <span class="price">$120</span></div>
                                     <div class="rate-block">Children: <span class="price">$50</span></div>
